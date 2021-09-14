@@ -64,17 +64,13 @@ authorStrive.put("/:postId", (req, res) => {
     req.body.avatar &&
     req.body.dateBirth
   ) {
-    if (authors.find((author) => author.email === req.body.email)) {
-      res.status(401).send({ Error: "Email already exists" });
-    } else {
-      // SUCCESS POST
-      const updateAuthor = { ...authors[index], ...req.body };
-      authors[index] = updateAuthor;
-      //   save file
-      fs.writeFileSync(authorJson, JSON.stringify(authors));
-      //   response
-      res.status(201).send({ Yep: "its ok", body: updateAuthor });
-    }
+    // SUCCESS POST
+    const updateAuthor = { ...authors[index], ...req.body };
+    authors[index] = updateAuthor;
+    //   save file
+    fs.writeFileSync(authorJson, JSON.stringify(authors));
+    //   response
+    res.status(201).send({ Yep: "its ok", body: updateAuthor });
   } else {
     res.status(400).send({ NotToday: "Bad request" });
   }
