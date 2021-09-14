@@ -22,15 +22,21 @@ authorStrive.get("/", (req, res) => {
 //GET BY ID
 authorStrive.get("/:postId", (req, res) => {
   const authors = JSON.parse(fs.readFileSync(authorJson));
-  const author = authors.find((s) => s._id == req.params.postId);
-
-  //   return file
-  res.status(201).send(author);
+  const author = authors.find((author) => author._id === req.params.postId);
+  if (!author) {
+    console.log(author);
+    res.status(401).send({ No: "Author" });
+  } else {
+    console.log(author);
+    //   return file
+    res.status(201).send(author);
+  }
 });
 // POST
 authorStrive.post("/", (req, res) => {
   const authors = JSON.parse(fs.readFileSync(authorJson));
-  const newAuthor = { ...req.body, _id: uniqid()};
+  const authorCheck = authors.find((author) => author.email === req.body.email);
+  const newAuthor = { ...req.body, _id: uniqid() };
   if (
     req.body.name &&
     req.body.surname &&
@@ -38,7 +44,7 @@ authorStrive.post("/", (req, res) => {
     req.body.avatar &&
     req.body.dateBirth
   ) {
-    if (authors.find((author) => author.email === req.body.email)) {
+    if (authorCheck) {
       res.status(404).send({ Error: "Email already exists" });
     } else {
       // SUCCESS POST
@@ -86,6 +92,6 @@ authorStrive.delete("/:postId", (req, res) => {
   //   rewrite
   fs.writeFileSync(authorJson, JSON.stringify(filtered));
   // response
-  res.status(201).send();
+  res.status(201).send({ item: "deleted" });
 });
 export default authorStrive;
