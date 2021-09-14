@@ -53,7 +53,30 @@ authorStrive.post("/", (req, res) => {
   }
 });
 // PUT
-
+authorStrive.put("/:postId", (req, res) => {
+  const authors = JSON.parse(fs.readFileSync(authorJson));
+  const index = authors.findIndex((author) => author._id === req.params.postId);
+  if (
+    index &&
+    req.body.name &&
+    req.body.surname &&
+    req.body.email &&
+    req.body.avatar &&
+    req.body.dateBirth
+  ) {
+    if (authors.find((author) => author.email === req.body.email)) {
+      res.status(401).send({ Error: "Email already exists" });
+    } else {
+      // SUCCESS POST
+      const updateAuthor = { ...authors[index], ...req.body };
+      authors[index] = updateAuthor;
+      //   response
+      res.status(201).send({ Yep: "its ok", body: updateAuthor });
+    }
+  } else {
+    res.status(400).send({ NotToday: "Bad request" });
+  }
+});
 // delete
 authorStrive.delete("/:postId", (req, res) => {
   const authors = JSON.parse(fs.readFileSync(authorJson));
