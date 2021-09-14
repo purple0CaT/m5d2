@@ -70,6 +70,8 @@ authorStrive.put("/:postId", (req, res) => {
       // SUCCESS POST
       const updateAuthor = { ...authors[index], ...req.body };
       authors[index] = updateAuthor;
+      //   save file
+      fs.writeFileSync(authorJson, JSON.stringify(authors));
       //   response
       res.status(201).send({ Yep: "its ok", body: updateAuthor });
     }
