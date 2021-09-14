@@ -11,11 +11,11 @@ const currentDirP = dirname(curentJson);
 const authorJson = join(currentDirP, "authorsLib.json");
 
 console.log("authorJson -", authorJson);
-// Get
+
+// =========== METHODS ================
 // GET
 authorStrive.get("/", (req, res) => {
-  const authorFile = fs.readFileSync(authorJson);
-  const authors = JSON.parse(authorFile);
+  const authors = JSON.parse(fs.readFileSync(authorJson));
   //   return file
   res.status(201).send(authors);
 });
@@ -39,7 +39,7 @@ authorStrive.post("/", (req, res) => {
     req.body.dateBirth
   ) {
     if (authors.find((author) => author.email === req.body.email)) {
-      res.status(401).send({ Error: "Email already exists" });
+      res.status(404).send({ Error: "Email already exists" });
     } else {
       // SUCCESS POST
       authors.push(newAuthor);

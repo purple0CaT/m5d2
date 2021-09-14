@@ -16,7 +16,5 @@ server.use(express.json());
 // ==== ROUTES / ENDPOINTS ====
 server.use("/authors", authorStrive);
 
-server.listen(port, () => {
-  console.log("Hello there!");
-});
+server.listen(port, () => {});
 console.table(listEndpoints(server));
