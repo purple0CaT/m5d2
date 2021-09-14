@@ -25,7 +25,7 @@ authorStrive.get("/:postId", (req, res) => {
   const author = authors.find((author) => author._id === req.params.postId);
   if (!author) {
     console.log(author);
-    res.status(401).send({ Res: "Author not exist" });
+    res.status(401).send("Author not exist");
   } else {
     console.log(author);
     //   return file
@@ -45,17 +45,17 @@ authorStrive.post("/", (req, res) => {
     req.body.dateBirth
   ) {
     if (authorCheck) {
-      res.status(404).send({ Res: "Email already exists" });
+      res.status(404).send("Email already exists");
     } else {
       // SUCCESS POST
       authors.push(newAuthor);
       // rewrite
       fs.writeFileSync(authorJson, JSON.stringify(authors));
       //   response
-      res.status(201).send({ Res: "its ok", body: newAuthor });
+      res.status(201).send(newAuthor);
     }
   } else {
-    res.status(400).send({ Res: "Bad request" });
+    res.status(400).send("Bad request");
   }
 });
 // PUT
@@ -76,12 +76,12 @@ authorStrive.put("/:postId", (req, res) => {
       //   save file
       fs.writeFileSync(authorJson, JSON.stringify(authors));
       //   response
-      res.status(201).send({ Res: "its ok", body: updateAuthor });
+      res.status(201).send(updateAuthor);
     } else {
-      res.status(401).send({ Res: "Bad request" });
+      res.status(401).send("Bad request");
     }
   } else {
-    res.status(400).send({ Res: "Bad request" });
+    res.status(400).send("Bad request");
   }
 });
 // delete
@@ -92,6 +92,7 @@ authorStrive.delete("/:postId", (req, res) => {
   //   rewrite
   fs.writeFileSync(authorJson, JSON.stringify(filtered));
   // response
-  res.status(201).send({ item: "deleted" });
+  res.status(201).send("deleted");
 });
+// ==
 export default authorStrive;
