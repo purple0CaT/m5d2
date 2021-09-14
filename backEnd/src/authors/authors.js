@@ -45,7 +45,7 @@ authorStrive.post("/", (req, res) => {
     req.body.dateBirth
   ) {
     if (authorCheck) {
-      res.status(404).send("Email already exists");
+      res.status(418).send("Email already exists");
     } else {
       // SUCCESS POST
       authors.push(newAuthor);
