@@ -4,16 +4,16 @@
     "surname": "Master",
     "email": "yoda@mail",
     "dateBirth": "21 jan 2000",
-    "avatar": "https://ui-avatars.com/api/?name=John+Doe",
+    "avatar": "https://cdn.jwplayer.com/v2/media/h1ferMj9/poster.jpg?width=720",
     "_id": "alkdnlaj123qlka"
   },
 
   {
     "name": "Dart",
-    "surname": "Veider",
+    "surname": "Vader",
     "email": "skywalker@mail",
     "dateBirth": "896 BBY",
-    "avatar": "https://ui-avatars.com/api/?name=John+Doe",
+    "avatar": "https://upload.wikimedia.org/wikipedia/en/0/0b/Darth_Vader_in_The_Empire_Strikes_Back.jpg",
     "_id": "5yua6167bktk6odfh"
   },
   {
