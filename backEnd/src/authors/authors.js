@@ -30,7 +30,7 @@ authorStrive.get("/:postId", (req, res) => {
 // POST
 authorStrive.post("/", (req, res) => {
   const authors = JSON.parse(fs.readFileSync(authorJson));
-  const newAuthor = { ...req.body, _id: uniqid(), createdAt: new Date() };
+  const newAuthor = { ...req.body, _id: uniqid()};
   if (
     req.body.name &&
     req.body.surname &&
